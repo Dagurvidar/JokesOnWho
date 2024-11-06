@@ -11,5 +11,7 @@ Svo velur notandi hvort hann eða API-inn hafi gefið fyndnara svar.
 ## API notað
 
 Þessi síða notar joke API frá https://v2.jokeapi.dev/
+og þá sérstaklega þennan hlekk: https://v2.jokeapi.dev/joke/Any?type=twopart
+til að fá brandara á forminu setup - punchline
 
 ## Tól notuð

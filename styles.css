@@ -27,7 +27,7 @@ html {
 
 .hidden {
   /* Viljum að þetta feli alltaf element, notum því !important */
-  display: none !important;
+  display: none;
 }
 
 html {
