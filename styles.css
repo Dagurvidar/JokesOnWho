@@ -36,8 +36,10 @@ html {
 
 input,
 textarea,
-button {
+button,
+p {
   font-size: inherit;
+  margin: 0.5rem;
 }
 
 button {

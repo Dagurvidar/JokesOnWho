@@ -50,3 +50,12 @@ export function empty(element) {
 export async function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function createCard(pString, buttonString, idName) {
+  const card = el("div", { class: "card" });
+  const userPrompt = el("p", {}, pString);
+  const thisButton = el("button", { id: `${idName}` }, `${buttonString}`);
+  card.appendChild(userPrompt);
+  card.appendChild(thisButton);
+  return card;
+}
