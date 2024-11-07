@@ -1,4 +1,4 @@
-import { createCard, el, sleep } from "./lib/elements.js";
+import { createCard, el, sleep, typeText, empty } from "./lib/elements.js";
 const API_URL = "https://v2.jokeapi.dev/joke/Any?type=twopart";
 
 document.getElementById("jokeButton").addEventListener("click", renderSetup);
@@ -23,8 +23,14 @@ async function renderSetup() {
   // Þessi hluti inniheldur virkni fyrsta takkans,
   // sækir og birtir setup brandarans
   try {
-    const divJokeSetupSection = document.getElementById("setup");
-    const jokeSetup = divJokeSetupSection.appendChild(el("p", {}));
+    const firstButton = document.getElementById("firstButton");
+    firstButton.classList.add("hidden");
+
+    const SetupSection = document.getElementById("setup");
+    const setupParagraph = el("p", {});
+    const jokeSetup = SetupSection.appendChild(setupParagraph);
+    console.log(jokeSetup);
+
     jokeSetup.textContent = "Finn brandara...";
     await sleep(1000);
     const [setup, punchline] = await fetchJoke();
@@ -39,7 +45,6 @@ async function renderSetup() {
 
 async function fetchUserInput(API_Punchline) {
   try {
-    await sleep(500);
     const sectionUserInput = document.getElementById("userInput");
     const userInputSection = document.getElementById("userPunchline");
     const pExplanation = el(
@@ -48,7 +53,7 @@ async function fetchUserInput(API_Punchline) {
       "Sláðu inn þitt eigið punchline, svo kýstu hvort þú eða bottinn hafi sigrað!"
     );
     sectionUserInput.insertBefore(pExplanation, userInputSection);
-    userInputSection.style.display = "block";
+    userInputSection.classList.remove("hidden");
     const sendUserInputButton = el(
       "button",
       { id: "sendUserInputButton" },
@@ -64,26 +69,44 @@ async function fetchUserInput(API_Punchline) {
   }
 }
 
-function renderUserInput(API_Punchline) {
+async function renderUserInput(API_Punchline) {
   const userPunchline = document.getElementById("userPunchline").value;
+  if (userPunchline.length <= 150 && userPunchline.trim()) {
+    const cardSection = document.getElementById("comparison");
 
-  const cardSection = document.getElementById("comparison");
+    const userCard = createCard(userPunchline, "Vote for user", "voteUser");
 
-  const userCard = createCard(userPunchline, "Vote for user", "voteUser");
-  const apiCard = createCard(API_Punchline, "Vote for API", "voteApi");
+    const userPunchlineSection = document.getElementById("userInput");
+    userPunchlineSection.classList.add("hidden");
 
-  // Append both cards to the cardSection container
-  cardSection.appendChild(userCard);
-  cardSection.appendChild(apiCard);
+    const apiCard = createCard("", "Vote for API", "voteApi");
+    const apiCardText = apiCard.querySelector("p");
+    // skrifar textann einn staf í einu
+    typeText(apiCardText, API_Punchline);
 
-  const voteUserButton = document.getElementById("voteUser");
-  const voteApiButton = document.getElementById("voteApi");
+    // Append both cards to the cardSection container
+    cardSection.appendChild(userCard);
+    cardSection.appendChild(apiCard);
 
-  voteUserButton.addEventListener("click", () => renderWinner(true));
-  voteApiButton.addEventListener("click", () => renderWinner(false));
+    const voteUserButton = document.getElementById("voteUser");
+    const voteApiButton = document.getElementById("voteApi");
+
+    voteUserButton.addEventListener("click", () => renderWinner(true));
+    voteApiButton.addEventListener("click", () => renderWinner(false));
+  } else {
+    const userInputSection = document.getElementById("userInput");
+    userInputSection.appendChild(
+      el("p", {}, "Vinsamlegast haltu orðafjölda milli 1 og 150")
+    );
+  }
 }
 
 function renderWinner(userIsTrue) {
+  const setupSection = document.getElementById("setup");
+  const comparisonSection = document.getElementById("comparison");
+  empty(setupSection);
+  empty(comparisonSection);
+
   const victorSection = document.getElementById("results");
 
   // skrítna merkjarunar að neðan eru emojis
@@ -95,4 +118,9 @@ function renderWinner(userIsTrue) {
   const messageSection = winner.querySelector("p");
   messageSection.innerHTML = winnerMessage;
   victorSection.appendChild(winner);
+
+  const resetButton = document.getElementById("resetButton");
+  resetButton.addEventListener("click", () => {
+    location.reload();
+  });
 }

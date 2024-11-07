@@ -59,3 +59,24 @@ export function createCard(pString, buttonString, idName) {
   card.appendChild(thisButton);
   return card;
 }
+
+export function renderError(error) {
+  console.log(error);
+  const message = error.message;
+  return el("p", {}, `Villa: ${message}`);
+}
+
+//líkir animation sem generatar setningu einn staf í einu
+export function typeText(element, text, speed = 30) {
+  let index = 0;
+
+  function type() {
+    if (index < text.length) {
+      element.textContent += text[index];
+      index++;
+      setTimeout(type, speed);
+    }
+  }
+
+  type();
+}

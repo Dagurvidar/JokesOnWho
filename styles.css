@@ -27,7 +27,7 @@ html {
 
 .hidden {
   /* Viljum að þetta feli alltaf element, notum því !important */
-  display: none;
+  display: none !important;
 }
 
 html {
@@ -43,6 +43,7 @@ p {
 }
 
 button {
+  display: block;
   padding: 0.25rem 0.5rem;
 }
 
