@@ -102,8 +102,26 @@ main {
   display: flex;
 }
 
+.card input {
+  width: 100%;
+}
+
 button {
   padding: 0.5rem;
+}
+
+#results {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#results .card {
+  align-items: center;
+}
+
+#errorSection {
+  align-items: center;
 }
 
 @media (width >= 750px) {

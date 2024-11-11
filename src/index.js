@@ -11,9 +11,29 @@ async function fetchJoke() {
     const punchline = joke.delivery;
     return [setup, punchline];
   } catch (error) {
-    console.error("Could not fetch joke:", error);
+    renderError(error);
     return ["", ""];
   }
+}
+
+function renderError(error) {
+  console.error("Something went wrong: ", error);
+  const mainSection = document.querySelector("main");
+  empty(mainSection);
+
+  const errorMessage = el("p", {}, el("strong", {}, "Eitthvað fór úrskeiðis"));
+  const errorSection = el(
+    "div",
+    { class: "card", id: "errorSection" },
+    errorMessage
+  );
+  const retryButton = el("button", { id: "retryButton" }, "Reyna aftur");
+  retryButton.addEventListener("click", () => {
+    location.reload();
+  });
+
+  errorSection.appendChild(retryButton);
+  mainSection.appendChild(errorSection);
 }
 
 /**
@@ -41,7 +61,7 @@ async function renderSetup() {
 
     fetchUserInput(punchline);
   } catch (error) {
-    console.error("næst ekki í brandara:", error);
+    renderError(error);
   }
 }
 
@@ -67,7 +87,7 @@ async function fetchUserInput(API_Punchline) {
       renderUserInput(API_Punchline)
     );
   } catch (error) {
-    console.error("Eitthvað klikkaði", error);
+    renderError(error);
   }
 }
 
