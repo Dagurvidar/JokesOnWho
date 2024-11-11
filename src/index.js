@@ -31,6 +31,8 @@ async function renderSetup() {
     const jokeSetup = SetupSection.appendChild(setupParagraph);
     console.log(jokeSetup);
 
+    const setupCard = document.getElementById("setupCard");
+    setupCard.classList.remove("hidden");
     jokeSetup.textContent = "Finn brandara...";
     await sleep(1000);
     const [setup, punchline] = await fetchJoke();
@@ -102,9 +104,9 @@ async function renderUserInput(API_Punchline) {
 }
 
 function renderWinner(userIsTrue) {
-  const setupSection = document.getElementById("setup");
+  const setupSection = document.getElementById("setupCard");
   const comparisonSection = document.getElementById("comparison");
-  empty(setupSection);
+  setupSection.classList.add("hidden");
   empty(comparisonSection);
 
   const victorSection = document.getElementById("results");
