@@ -25,7 +25,7 @@ function renderError(error) {
   const errorSection = el(
     "div",
     { class: "card", id: "errorSection" },
-    errorMessage
+    errorMessage,
   );
   const retryButton = el("button", { id: "retryButton" }, "Reyna aftur");
   retryButton.addEventListener("click", () => {
@@ -72,19 +72,19 @@ async function fetchUserInput(API_Punchline) {
     const pExplanation = el(
       "p",
       {},
-      "Sláðu inn þitt eigið punchline, svo kýstu hvort þú eða bottinn hafi sigrað!"
+      "Sláðu inn þitt eigið punchline, svo kýstu hvort þú eða bottinn hafi sigrað!",
     );
     sectionUserInput.insertBefore(pExplanation, userInputSection);
     userInputSection.classList.remove("hidden");
     const sendUserInputButton = el(
       "button",
       { id: "sendUserInputButton" },
-      "Senda"
+      "Senda",
     );
     sectionUserInput.appendChild(sendUserInputButton);
 
     sendUserInputButton.addEventListener("click", () =>
-      renderUserInput(API_Punchline)
+      renderUserInput(API_Punchline),
     );
   } catch (error) {
     renderError(error);
@@ -118,7 +118,7 @@ async function renderUserInput(API_Punchline) {
   } else {
     const userInputSection = document.getElementById("userInput");
     userInputSection.appendChild(
-      el("p", {}, "Vinsamlegast haltu orðafjölda milli 1 og 150")
+      el("p", {}, "Vinsamlegast haltu orðafjölda milli 1 og 150"),
     );
   }
 }
