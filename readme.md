@@ -4,9 +4,9 @@ Sýnilausn á [verkefni 9](https://github.com/vefforritun/vef1-2024-v9) notuð s
 
 ## Lýsing á síðu:
 
-Síðan hefur takka sem hægt er að ýta á til að fá brandara.
-Fyrst fær notandi setup brandarans og er notandi þá beðinn um að gefa sitt eigið punchline.
-Svo velur notandi hvort hann eða API-inn hafi gefið fyndnara svar.
+Síðan inniheldur takka sem sækir brandara. Notandi fær fyrst upphaf brandarans (setup) og er síðan beðinn um að gefa sitt eigið punchline. Að því loknu velur notandi hvort hann eða API-inn hafi gefið fyndnara svar.
+
+DISCLAIMER: Ég tek enga ábyrgð á efni mögulegra óviðeigandi eða ósmekklegra brandara sem kunna að birtast með vali á þessari síðu.
 
 ## API notað
 
@@ -15,3 +15,5 @@ og þá sérstaklega þennan hlekk: https://v2.jokeapi.dev/joke/Any?type=twopart
 til að fá brandara á forminu setup - punchline
 
 ## Tól notuð
+
+Vite er notað til að auðvelda build ferlið og gera síðuna hraðari
